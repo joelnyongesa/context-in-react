@@ -1,9 +1,11 @@
 // Accessing the value from the cotext.
 import { useContext } from "react";
 import { PauseContext } from "../context/paused";
+import { CountContext } from "../context/count";
 
-const Controls = ({ increment, decrement, like}) => {
+const Controls = () => {
     const [paused, setPaused] = useContext(PauseContext)
+    const {increment, decrement, like} = useContext(CountContext)
 
     function togglePaused(){
         setPaused(paused => !paused)

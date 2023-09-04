@@ -1,18 +1,18 @@
+import { CountContext } from "../context/count";
 import { PauseContext } from "../context/paused";
 import Controls from "./Controls";
 import Likes from "./Likes";
 import { useContext, useEffect, useState } from "react";
 
-function Counter({ togglePaused}){
-    const [count, setCount] = useState(0);
-    const [likedNumbers, setLikedNumbers] = useState({});
+function Counter(){
+    // const [count, setCount] = useState(0);
+    // const [likedNumbers, setLikedNumbers] = useState({});
     const [paused, setPaused] = useContext(PauseContext)
+    const {count, likedNumbers, increment, decrement, like, } = useContext(CountContext)
 
     useEffect(()=>{
         if(!paused){
-            const interval = setInterval(()=>{
-                setCount(count=>count + 1);
-            },1000);
+            const interval = setInterval(increment,1000);
 
             return function cleanup(){
                 clearInterval(interval)
@@ -20,23 +20,7 @@ function Counter({ togglePaused}){
         }
     }, [paused]);
 
-    function increment(){
-        setCount(count=> count + 1);
-    }
 
-    function decrement(){
-        setCount(count => count -1)
-    }
-
-    function like(){
-        setLikedNumbers((likedNumbers)=>{
-            const likes = (likedNumbers[count] || 0) + 1;
-            return{
-                ...likedNumbers,
-                [count]: likes,
-            };
-        });
-    }
 
     return(
         <div>
@@ -46,9 +30,9 @@ function Counter({ togglePaused}){
             decrement={decrement}
             like={like}
             paused={paused}
-            togglePaused={togglePaused}
+            // togglePaused={togglePaused}
             />
-            <Likes likedNumbers={likedNumbers}/>
+            <Likes />
         </div>
     )
 }
