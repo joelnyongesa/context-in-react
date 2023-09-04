@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import {v4 as uuid} from 'uuid'
+import {v4 as uuid} from 'uuid';
+import { useContext } from 'react';
+import { PauseContext } from '../context/paused';
 
-const CommentForm = ({ paused, addComment }) => {
+const CommentForm = ({ addComment }) => {
     const [text, setText] = useState("")
+    const [paused, setPaused] = useContext(PauseContext)
 
     function handleSubmit(e){
         e.preventDefault();

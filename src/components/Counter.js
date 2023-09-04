@@ -1,10 +1,12 @@
+import { PauseContext } from "../context/paused";
 import Controls from "./Controls";
 import Likes from "./Likes";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
-function Counter({ paused, togglePaused}){
+function Counter({ togglePaused}){
     const [count, setCount] = useState(0);
     const [likedNumbers, setLikedNumbers] = useState({});
+    const [paused, setPaused] = useContext(PauseContext)
 
     useEffect(()=>{
         if(!paused){

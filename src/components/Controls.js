@@ -1,4 +1,13 @@
-const Controls = ({ increment, decrement, like, paused, togglePaused }) => {
+// Accessing the value from the cotext.
+import { useContext } from "react";
+import { PauseContext } from "../context/paused";
+
+const Controls = ({ increment, decrement, like}) => {
+    const [paused, setPaused] = useContext(PauseContext)
+
+    function togglePaused(){
+        setPaused(paused => !paused)
+    }
     return ( 
         <div>
             <button onClick={decrement} disabled={paused}>
